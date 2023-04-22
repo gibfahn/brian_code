@@ -1,38 +1,32 @@
+use color_eyre::{eyre::Context, Result};
+use std::io::Write;
+
+pub mod bubble_sort;
+pub mod further_maths;
+pub mod harshad_numbers;
+pub mod most_frequent_digit;
+pub mod prime;
+
 fn main() {
-    println!("Hi");
+    loop {
+        if let Err(e) = prompt_and_run() {
+            println!("  Error: {e}");
+        }
+        println!();
+    }
 }
 
-pub fn is_prime(maybe_prime: u64) -> bool {
-    if maybe_prime == 1 {
-        return false;
+fn prompt_and_run() -> Result<()> {
+    let mut s = String::new();
+    print!("Input: ");
+    let _ = std::io::stdout().flush();
+    std::io::stdin()
+        .read_line(&mut s)
+        .wrap_err("Did not enter a correct string")?;
+    if let Some('\n') = s.chars().next_back() {
+        s.pop();
     }
-    for x in 2..maybe_prime {
-        let remainder = maybe_prime % x;
-        if remainder == 0 {
-            return false;
-        }
-    }
-
-    true
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::is_prime;
-
-    const EXPECTED_PRIMES: [u64; 25] = [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89,
-        97,
-    ];
-
-    #[test]
-    fn test_is_prime() {
-        let mut actual_primes = Vec::new();
-        for n in 1..=100 {
-            if is_prime(n) {
-                actual_primes.push(n);
-            }
-        }
-        assert_eq!(EXPECTED_PRIMES.as_ref(), actual_primes);
-    }
+    println!("  User input: {s}");
+    println!("{}", further_maths::f(s.parse()?)?);
+    Ok(())
 }
