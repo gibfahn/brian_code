@@ -12,6 +12,10 @@ numbers = {
 }
 
 def find_first_number(line: str) -> str:
+    """Find the first digit in a line and return it.
+    
+    A digit is a number like '2' or a string of characters like 'two'
+    """
     for position in range(len(line)):
         if line[position].isnumeric():
             return line[position]
@@ -21,6 +25,10 @@ def find_first_number(line: str) -> str:
                 return numbers[x]
 
 def find_last_number(line: str) -> str:
+    """Find the last digit in a line and return it.
+    
+    A digit is a number like '2' or a string of characters like 'two'
+    """
     for position in range(len(line) - 1, -1, -1):
         if line[position].isnumeric():
             return line[position]
