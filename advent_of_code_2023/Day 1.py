@@ -1,15 +1,15 @@
-numbers = {
-    "one": "1",
-    "two": "2",
-    "three": "3",
-    "four": "4",
-    "five": "5",
-    "six": "6",
-    "seven": "7",
-    "eight": "8",
-    "nine": "9",
-    "zero": "0",
-}
+numbers = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+]
 
 def find_first_number(line: str) -> str:
     """Find the first digit in a line and return it.
@@ -20,9 +20,9 @@ def find_first_number(line: str) -> str:
         if line[position].isnumeric():
             return line[position]
 
-        for x in numbers:
+        for index, x in enumerate(numbers):
             if line[position:].startswith(x):
-                return numbers[x]
+                return str(index)
 
 def find_last_number(line: str) -> str:
     """Find the last digit in a line and return it.
@@ -32,10 +32,10 @@ def find_last_number(line: str) -> str:
     for position in range(len(line) - 1, -1, -1):
         if line[position].isnumeric():
             return line[position]
-        for x in numbers:
+        for index, x in enumerate(numbers):
             reversed_x = x[::-1]
             if line[position:0:-1].startswith(reversed_x):
-                return numbers[x]
+                return str(index)
         
 
 
