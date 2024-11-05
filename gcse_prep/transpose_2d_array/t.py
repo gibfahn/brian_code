@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
 
 a = [
-    [1,2,3,4,5],
-    [6,7,8,9,10],
-    [11,12,13,14,15],
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15],
 ]
 
-b = []
+b = [[]]
+# b[0] -> b[[]]
+# b[0][0] = a[0][0]
 
-for row in range(0, len(a)):
-  for col in range(0, len(a[row])):
-    if len(b) <= col:
-      # b += [[]]
-      b.append([])
-    if len(b[col]) <= row:
-      #b[col] += [[]]
-      b[col].append([])
+# location -> `for in range()`
+# contents -> `for in list`
+# both -> `for i in range()`, and then `list[i]`
 
-    el = a[row][col]
-    b[col][row] = el
-   
+for row in range(len(a)):
+    for col in range(len(a[row])):
+        if len(b) <= col:
+            b.append([])
+        b[col].append(a[row][col])
 
 print(b)
