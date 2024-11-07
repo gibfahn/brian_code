@@ -6,18 +6,23 @@ a = [
     [11, 12, 13, 14, 15],
 ]
 
-b = [[]]
-# b[0] -> b[[]]
-# b[0][0] = a[0][0]
+b = []
 
-# location -> `for in range()`
-# contents -> `for in list`
-# both -> `for i in range()`, and then `list[i]`
+# Transpose b so the assert below passes
+# for row in range(len(a)):
+#     for col in range(len(a[row])):
+#         if len(b) <= col:
+#             b.append([])
+#         b[col].append(a[row][col])
 
-for row in range(len(a)):
-    for col in range(len(a[row])):
-        if len(b) <= col:
-            b.append([])
-        b[col].append(a[row][col])
+b = [list(i) for i in zip(*a)]
 
 print(b)
+
+assert b == [
+    [1, 6, 11],
+    [2, 7, 12],
+    [3, 8, 13],
+    [4, 9, 14],
+    [5, 10, 15],
+]
